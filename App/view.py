@@ -64,7 +64,7 @@ def load_data(control):
     """
     Carga los datos
     """
-    data = controller.load_data(control, "Ruta")
+    data = controller.load_data(control)
     return data
 
 
@@ -157,6 +157,15 @@ if __name__ == "__main__":
             if int(inputs) == 1:
                 print("Cargando información de los archivos ....\n")
                 data = load_data(control)
+                catalog = control['model']
+                data = catalog['data']
+                elements = data['elements']
+                primeros_ultimos = controller.primeros_ultimos(data)
+                prim = lt.getElement(data,1)
+
+                
+                print(prim)
+
             elif int(inputs) == 2:
                 print_req_1(control)
 

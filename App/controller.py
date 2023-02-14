@@ -44,12 +44,18 @@ def new_controller():
 
 # Funciones para la carga de datos
 
-def load_data(control, filename):
+def load_data(control):
     """
     Carga los datos del reto
     """
     # TODO: Realizar la carga de datos
-    pass
+    catalog = control['model']
+    servicefile1 = cf.data_dir + "Salida_agregados_renta_juridicos_AG-small.csv"
+    input_file1 = csv.DictReader(open(servicefile1, encoding='utf-8'))
+    for program1 in input_file1:
+        model.add_data(catalog, program1)
+
+    return control
 
 
 # Funciones de ordenamiento
@@ -162,3 +168,6 @@ def delta_time(start, end):
     """
     elapsed = float(end - start)
     return elapsed
+
+def primeros_ultimos(catalog):
+    return (model.primeros_3(catalog), model.ultimos_3(catalog))

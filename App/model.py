@@ -65,8 +65,8 @@ def add_data(data_structs, data):
     """
     Función para agregar nuevos elementos a la lista
     """
-    d = new_data(data["id"], data["info"])
-    lt.addLast(data_structs["data"], d)
+    #d = new_data(data["id"], data["info"])
+    lt.addLast(data_structs["data"], data)
 
     return data_structs
 
@@ -202,3 +202,9 @@ def sort(data_structs):
     Función encargada de ordenar la lista con los datos
     """
     sa.sort(data_structs["data"], sort_criteria)
+
+def primeros_3(catalog):
+    return (lt.subList(catalog, 1, 3))
+
+def ultimos_3(catalog):
+    return lt.subList(catalog,-3,3)
