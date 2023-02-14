@@ -162,9 +162,20 @@ if __name__ == "__main__":
                 elements = data['elements']
                 primeros_ultimos = controller.primeros_ultimos(data)
                 prim = lt.getElement(data,1)
+                prim2 =lt.getElement(data,2)
+                prim3 = lt.getElement(data,3)
+                primult3 = lt.getElement(data,-3)
+                primult2 = lt.getElement(data,-2)
+                primult1 = lt.getElement(data,-1)
 
                 
                 print(prim)
+                print(prim2)
+                print(prim3)
+                print(primult3)
+                print(primult2)
+                print(primult1)
+                   
 
             elif int(inputs) == 2:
                 print_req_1(control)
