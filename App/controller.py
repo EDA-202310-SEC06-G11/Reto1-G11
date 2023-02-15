@@ -169,5 +169,4 @@ def delta_time(start, end):
     elapsed = float(end - start)
     return elapsed
 
-def primeros_ultimos(catalog):
-    return (model.primeros_3(catalog), model.ultimos_3(catalog))
+

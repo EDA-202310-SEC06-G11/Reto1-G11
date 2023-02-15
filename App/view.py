@@ -160,22 +160,22 @@ if __name__ == "__main__":
                 catalog = control['model']
                 data = catalog['data']
                 elements = data['elements']
-                primeros_ultimos = controller.primeros_ultimos(data)
-                prim = lt.getElement(data,1)
-                prim2 =lt.getElement(data,2)
-                prim3 = lt.getElement(data,3)
-                primult3 = lt.getElement(data,-3)
-                primult2 = lt.getElement(data,-2)
-                primult1 = lt.getElement(data,-1)
-
+                size_data=lt.size(data)
+                size_ultimos3=size_data-3
+                """
+                primeros3=lt.subList(data, 0, 3)
+                ultimos3=lt.subList(data, size_ultimos3, 3)
+                print(primeros3)
+                print(ultimos3)
+                """
+                dato1=lt.getElement(data,1)
+                dato2=lt.getElement(data,2)
+                dato3=lt.getElement(data,3)
+                datoult3=lt.getElement(data,-2)
+                datoult2=lt.getElement(data,-1)
+                dato0=lt.getElement(data,0)
                 
-                print(prim)
-                print(prim2)
-                print(prim3)
-                print(primult3)
-                print(primult2)
-                print(primult1)
-                   
+                print(dato1,dato2,dato3,datoult3,datoult2,dato0)
 
             elif int(inputs) == 2:
                 print_req_1(control)
