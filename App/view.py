@@ -161,7 +161,7 @@ if __name__ == "__main__":
                 data = catalog['data']
                 elements = data['elements']
                 primeros_ultimos = controller.primeros_ultimos(data)
-                prim = lt.getElement(data,1)
+                prim = lt.getElement(data,0)
 
                 
                 print(prim)
