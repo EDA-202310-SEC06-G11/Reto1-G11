@@ -203,8 +203,3 @@ def sort(data_structs):
     """
     sa.sort(data_structs["data"], sort_criteria)
 
-def primeros_3(catalog):
-    return (lt.subList(catalog, 1, 3))
-
-def ultimos_3(catalog):
-    return lt.subList(catalog,-3,3)
