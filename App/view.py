@@ -37,11 +37,11 @@ operación solicitada
 """
 
 
-def new_controller():
+def new_controller(data_tipo):
     """
         Se crea una instancia del controlador
     """
-    control = controller.new_controller()
+    control = controller.new_controller(data_tipo)
     return control
 
 
@@ -141,7 +141,7 @@ def print_req_8(control):
 
 
 # Se crea el controlador asociado a la vista
-control = new_controller()
+#control = new_controller()
 
 # main del reto
 if __name__ == "__main__":
@@ -156,13 +156,15 @@ if __name__ == "__main__":
         try:
             if int(inputs) == 1:
                 print("Cargando información de los archivos ....\n")
+                data_tipo = input('cual estructura desea usar (ARRAY_LIST, SINGLE_LINKED): ')
+                control = new_controller(data_tipo)
                 data = load_data(control)
                 catalog = control['model']
                 data = catalog['data']
+                """
                 elements = data['elements']
                 size_data=lt.size(data)
                 size_ultimos3=size_data-3
-                """
                 primeros3=lt.subList(data, 0, 3)
                 ultimos3=lt.subList(data, size_ultimos3, 3)
                 print(primeros3)

@@ -44,7 +44,7 @@ dos listas, una para los videos, otra para las categorias de los mismos.
 # Construccion de modelos
 
 
-def new_data_structs():
+def new_data_structs(data_tipo):
     """
     Inicializa las estructuras de datos del modelo. Las crea de
     manera vacía para posteriormente almacenar la información.
@@ -53,7 +53,7 @@ def new_data_structs():
         "data": None,
     }
 
-    data_structs["data"] = lt.newList(datastructure="ARRAY_LIST",
+    data_structs["data"] = lt.newList(datastructure=data_tipo,
                                      cmpfunction=compare)
 
     return data_structs
