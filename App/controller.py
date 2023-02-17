@@ -44,13 +44,17 @@ def new_controller(data_tipo):
 
 # Funciones para la carga de datos
 
-def load_data(control):
+def load_data(control,size):
     """
     Carga los datos del reto
     """
     # TODO: Realizar la carga de datos
     catalog = control['model']
-    servicefile1 = cf.data_dir + "Salida_agregados_renta_juridicos_AG-small.csv"
+    if(size in "small" or size in "large"):
+        file= "Salida_agregados_renta_juridicos_AG-"+size+".csv"
+    else:
+        file="Salida_agregados_renta_juridicos_AG-"+size+".csv"
+    servicefile1 = cf.data_dir + file
     input_file1 = csv.DictReader(open(servicefile1, encoding='utf-8'))
     for program1 in input_file1:
         model.add_data(catalog, program1)

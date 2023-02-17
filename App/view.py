@@ -60,11 +60,11 @@ def print_menu():
     print("0- Salir")
 
 
-def load_data(control):
+def load_data(control,size):
     """
     Carga los datos
     """
-    data = controller.load_data(control)
+    data = controller.load_data(control,size)
     return data
 
 
@@ -157,8 +157,18 @@ if __name__ == "__main__":
             if int(inputs) == 1:
                 print("Cargando información de los archivos ....\n")
                 data_tipo = input('cual estructura desea usar (ARRAY_LIST, SINGLE_LINKED): ')
+                print("Elija el tamaño del archivo")
+                print("5pct")
+                print("10pct")
+                print("20pct")
+                print("30pct")
+                print("50pct")
+                print("80pct")
+                print("small")
+                print("large")
+                size=input("Ingrese el tamaño:")
                 control = new_controller(data_tipo)
-                data = load_data(control)
+                data = load_data(control,size)
                 catalog = control['model']
                 data = catalog['data']
                 """
