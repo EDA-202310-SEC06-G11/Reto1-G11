@@ -203,3 +203,23 @@ def sort(data_structs):
     """
     sa.sort(data_structs["data"], sort_criteria)
 
+def cmp_impuestos_by_anio_CAE(impuesto1, impuesto2):
+    """
+    Devuelve verdadero (True) si el año de impuesto1 es menor que el de impuesto2,
+    en caso de que sean iguales tenga en cuenta el código de la actividad económica,
+    de lo contrario devuelva falso (False).
+    Args:
+    impuesto1: información del primer registro de impuestos que incluye el “Año” y el
+    “Código
+    actividad económica”
+    impuesto2: información del segundo registro de impuestos que incluye el “Año” y el
+    “Código actividad económica”
+    """
+     
+    if(impuesto1["id"] > impuesto2["id"]):
+        return True
+    elif(impuesto1["id"] == impuesto2["id"]):
+        if(impuesto1["Código actividad económica"] > impuesto2["Código actividad económica"]):
+            return True
+    else:
+        return False

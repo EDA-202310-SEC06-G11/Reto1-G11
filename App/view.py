@@ -19,13 +19,16 @@
  * You should have received a copy of the GNU General Public License
  * along withthis program.  If not, see <http://www.gnu.org/licenses/>.
  """
-
+import model 
 import config as cf
 import sys
 import controller
 from DISClib.ADT import list as lt
 from DISClib.ADT import stack as st
 from DISClib.ADT import queue as qu
+from DISClib.Algorithms.Sorting import selectionsort as sele
+from DISClib.Algorithms.Sorting import shellsort as sh
+from DISClib.Algorithms.Sorting import insertionsort as ins
 assert cf
 #from tabulate import tabulate
 
@@ -180,6 +183,15 @@ if __name__ == "__main__":
                 print(primeros3)
                 print(ultimos3)
                 """
+                order_tipo= input("Cual tipo de ordenamiento desea ejecutar(selection,shell,insertion):")
+                if order_tipo=="selection":
+                    data=sele.sort(data, model.mp_impuestos_by_anio_CAE)
+                elif order_tipo=="shell":
+                    data=sh.sort(data, model.mp_impuestos_by_anio_CAE)
+                elif order_tipo=="insertion":
+                    data=ins.sort(data, model.mp_impuestos_by_anio_CAE)
+                 
+                   
                 dato1=lt.getElement(data,1)
                 dato2=lt.getElement(data,2)
                 dato3=lt.getElement(data,3)
@@ -187,7 +199,8 @@ if __name__ == "__main__":
                 datoult2=lt.getElement(data,-1)
                 dato0=lt.getElement(data,0)
                 
-                print(dato1,dato2,dato3,datoult3,datoult2,dato0)
+                #print(dato1,dato2,dato3,datoult3,datoult2,dato0)
+                print(data)
 
             elif int(inputs) == 2:
                 print_req_1(control)
