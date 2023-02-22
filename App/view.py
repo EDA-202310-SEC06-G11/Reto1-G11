@@ -29,6 +29,8 @@ from DISClib.ADT import queue as qu
 from DISClib.Algorithms.Sorting import selectionsort as sele
 from DISClib.Algorithms.Sorting import shellsort as sh
 from DISClib.Algorithms.Sorting import insertionsort as ins
+from DISClib.Algorithms.Sorting import mergesort as mrg
+from DISClib.Algorithms.Sorting import quicksort as qck
 assert cf
 #from tabulate import tabulate
 
@@ -183,14 +185,18 @@ if __name__ == "__main__":
                 print(primeros3)
                 print(ultimos3)
                 """
-                order_tipo= input("Cual tipo de ordenamiento desea ejecutar(selection,shell,insertion):")
+                order_tipo= input("Cual tipo de ordenamiento desea ejecutar(selection,shell,insertion,merge,quick):")
                 if order_tipo=="selection":
                     data=sele.sort(data, model.cmp_impuestos_by_anio_CAE)
                 elif order_tipo=="shell":
                     data=sh.sort(data, model.cmp_impuestos_by_anio_CAE)
                 elif order_tipo=="insertion":
                     data=ins.sort(data, model.cmp_impuestos_by_anio_CAE)
-                 
+                elif order_tipo=="merge":
+                    data=mrg.sort(data, model.cmp_impuestos_by_anio_CAE) 
+                elif order_tipo=="quick":
+                    data=qck.sort(data, model.cmp_impuestos_by_anio_CAE)
+                
                    
                 dato1=lt.getElement(data,1)
                 dato2=lt.getElement(data,2)
