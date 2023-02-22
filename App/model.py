@@ -223,3 +223,29 @@ def cmp_impuestos_by_anio_CAE(impuesto1, impuesto2):
             return True
     else:
         return False
+
+def ordenamiento(order_tipo, data):
+    if order_tipo=="selection":
+        data=se.sort(data, cmp_impuestos_by_anio_CAE)
+        return data
+    elif order_tipo=="shell":
+        data=sa.sort(data, cmp_impuestos_by_anio_CAE)
+        return data
+    elif order_tipo=="insertion":
+        data=ins.sort(data, cmp_impuestos_by_anio_CAE)
+        return data
+    elif order_tipo=="merge":
+        data=merg.sort(data, cmp_impuestos_by_anio_CAE)
+        return data
+    elif order_tipo=="quick":
+        data=quk.sort(data, cmp_impuestos_by_anio_CAE)
+        return data
+
+def primeros_ultimos(data):
+    dato1=lt.getElement(data,1)
+    dato2=lt.getElement(data,2)
+    dato3=lt.getElement(data,3)
+    datoult3=lt.getElement(data,-2)
+    datoult2=lt.getElement(data,-1)
+    dato0=lt.getElement(data,0)
+    return (dato1,dato2,dato3,datoult3,datoult2,dato0)

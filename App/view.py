@@ -186,27 +186,12 @@ if __name__ == "__main__":
                 print(ultimos3)
                 """
                 order_tipo= input("Cual tipo de ordenamiento desea ejecutar(selection,shell,insertion,merge,quick):")
-                if order_tipo=="selection":
-                    data=sele.sort(data, model.cmp_impuestos_by_anio_CAE)
-                elif order_tipo=="shell":
-                    data=sh.sort(data, model.cmp_impuestos_by_anio_CAE)
-                elif order_tipo=="insertion":
-                    data=ins.sort(data, model.cmp_impuestos_by_anio_CAE)
-                elif order_tipo=="merge":
-                    data=mrg.sort(data, model.cmp_impuestos_by_anio_CAE) 
-                elif order_tipo=="quick":
-                    data=qck.sort(data, model.cmp_impuestos_by_anio_CAE)
+                list_ordenada = controller.ordenar(order_tipo,data)
                 
-                   
-                dato1=lt.getElement(data,1)
-                dato2=lt.getElement(data,2)
-                dato3=lt.getElement(data,3)
-                datoult3=lt.getElement(data,-2)
-                datoult2=lt.getElement(data,-1)
-                dato0=lt.getElement(data,0)
+                prim_ultimos = controller.prim_ult(list_ordenada)
                 
                 #print(dato1,dato2,dato3,datoult3,datoult2,dato0)
-                print(data)
+                print(prim_ultimos)
 
             elif int(inputs) == 2:
                 print_req_1(control)

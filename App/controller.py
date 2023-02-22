@@ -174,3 +174,9 @@ def delta_time(start, end):
     return elapsed
 
 
+#funciones del lab
+def ordenar(order_tipo, data):
+    return model.ordenamiento(order_tipo, data)
+
+def prim_ult(data):
+    return model.primeros_ultimos(data)
