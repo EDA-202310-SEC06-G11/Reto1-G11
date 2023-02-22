@@ -54,7 +54,7 @@ def new_data_structs(data_tipo):
     }
 
     data_structs["data"] = lt.newList(datastructure=data_tipo,
-                                     cmpfunction=compare)
+                                     cmpfunction=cmp_impuestos_by_anio_CAE)
 
     return data_structs
 
@@ -216,9 +216,9 @@ def cmp_impuestos_by_anio_CAE(impuesto1, impuesto2):
     “Código actividad económica”
     """
      
-    if(impuesto1["id"] > impuesto2["id"]):
+    if(impuesto1["Año"] > impuesto2["Año"]):
         return True
-    elif(impuesto1["id"] == impuesto2["id"]):
+    elif(impuesto1["Año"] == impuesto2["Año"]):
         if(impuesto1["Código actividad económica"] > impuesto2["Código actividad económica"]):
             return True
     else:

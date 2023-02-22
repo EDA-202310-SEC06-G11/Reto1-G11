@@ -185,11 +185,11 @@ if __name__ == "__main__":
                 """
                 order_tipo= input("Cual tipo de ordenamiento desea ejecutar(selection,shell,insertion):")
                 if order_tipo=="selection":
-                    data=sele.sort(data, model.mp_impuestos_by_anio_CAE)
+                    data=sele.sort(data, model.cmp_impuestos_by_anio_CAE)
                 elif order_tipo=="shell":
-                    data=sh.sort(data, model.mp_impuestos_by_anio_CAE)
+                    data=sh.sort(data, model.cmp_impuestos_by_anio_CAE)
                 elif order_tipo=="insertion":
-                    data=ins.sort(data, model.mp_impuestos_by_anio_CAE)
+                    data=ins.sort(data, model.cmp_impuestos_by_anio_CAE)
                  
                    
                 dato1=lt.getElement(data,1)
