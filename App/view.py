@@ -186,8 +186,11 @@ if __name__ == "__main__":
                 print(ultimos3)
                 """
                 order_tipo= input("Cual tipo de ordenamiento desea ejecutar(selection,shell,insertion,merge,quick):")
+                start_time=controller.get_time()
                 list_ordenada = controller.ordenar(order_tipo,data)
-                
+                end_time=controller.get_time()
+                tiempo = controller.delta_time(start_time,end_time)
+                print(tiempo)
                 prim_ultimos = controller.prim_ult(list_ordenada)
                 
                 #print(dato1,dato2,dato3,datoult3,datoult2,dato0)
