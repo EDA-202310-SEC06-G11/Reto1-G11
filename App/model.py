@@ -168,18 +168,29 @@ def req_5(data_structs):
     final_list=lt.newList("ARRAY_LIST")
     start=lt.firstElement(sorted)["Año"]
     code_first=lt.firstElement(sorted)["Código subsector económico"]
-    suma=0
+    suma=-1
     starter=0
     primer =0
-    
+    suma_ingresos=0
+    suma_gastos=0
+    suma_saldo_a_pagar=0
+    suma_saldo_a_favor =0
     for i in lt.iterator(sorted):
         anio=i["Año"]
         descuentoi=int(i["Descuentos tributarios"])
+        total_ingresos=int(i["Total ingresos netos"])
+        total_gastos =int(i["Total costos y gastos"])
         codei = i["Código subsector económico"]
+        total_saldo_a_pagar=int(i["Total saldo a pagar"])
+        total_saldo_a_favor=int(i["Total saldo a favor"])
         if(anio== start):
             start=anio
             if(codei==code_first): 
                 suma+=descuentoi 
+                suma_ingresos+=total_ingresos
+                suma_gastos+=total_gastos
+                suma_saldo_a_pagar+=total_saldo_a_pagar
+                suma_saldo_a_favor+=total_saldo_a_favor
                 code_first = codei 
                 if(descuentoi>=starter): 
                     starter=descuentoi 
@@ -191,25 +202,77 @@ def req_5(data_structs):
                 if(suma  >= primer ):
                     primer = suma 
                     pos = elem 
+                    mayor_ingresos=suma_ingresos
+                    mayor_gastos = suma_gastos
+                    mayor_saldo_a_pagar=suma_saldo_a_pagar
+                    mayor_saldo_a_favor=suma_saldo_a_favor
                 if(descuentoi >= primer): 
                     primer = descuentoi   
-                    pos = i               
-                suma=descuentoi 
+                    pos = i
+                    mayor_ingresos=total_ingresos   
+                    mayor_gastos=total_gastos
+                    mayor_saldo_a_pagar=total_saldo_a_pagar
+                    mayor_saldo_a_favor=total_saldo_a_favor            
+                suma=descuentoi # 2977
                 starter = descuentoi 
                 elem = i 
+                suma_ingresos=total_ingresos
+                suma_gastos=total_gastos
+                suma_saldo_a_pagar=total_saldo_a_pagar
+                suma_saldo_a_favor=total_saldo_a_favor
         elif(anio!= start):
+            if(suma  >= primer ):
+                    primer = suma 
+                    pos = elem 
+                    mayor_ingresos=suma_ingresos
+                    mayor_gastos=suma_gastos
+                    mayor_saldo_a_pagar=suma_saldo_a_pagar
+                    mayor_saldo_a_favor=suma_saldo_a_favor
             d = {
-            "total saldo a favor" : pos['total saldo a favor'],
-            "total desucento tributario": None
+            "Año" : pos["Año"],
+            "Código sector económico": pos["Código sector económico" ],
+            "Nombre sector económico": pos["Nombre sector económico"],  
+            "Código subsector económico": pos["Código subsector económico"],  
+            "Nombre subsector económico" : pos["Nombre subsector económico"],                            
+            "Total de descuentos tributarios del subsector economico": None,
+            "Total ingresos netos del subsector economico": None,
+            "Total costos y gastos del subsector economico":None,
+            "Total saldo a pagar del subsector economico": None,
+            "Total saldo a favor del subsector economico": None
             }
-            d['total descuento tributario'] = primer
+            d['Total de descuentos tributarios del subsector economico'] = primer
+            d["Total ingresos netos del subsector economico"]=mayor_ingresos
+            d["Total costos y gastos del subsector economico"]= mayor_gastos
+            d["Total saldo a pagar del subsector economico"]= mayor_saldo_a_pagar
+            d["Total saldo a favor del subsector economico"]=mayor_saldo_a_favor
             lt.addFirst(final_list,d)
             start =  anio
             code_first = codei
-            suma = descuentoi
-            elem = i
+            suma = descuentoi 
+            elem = i 
             primer = descuentoi
-    lt.addFirst(final_list,pos)  
+            suma_ingresos= total_ingresos
+            suma_gastos= total_gastos
+            suma_saldo_a_pagar= total_saldo_a_pagar
+            suma_saldo_a_favor=total_saldo_a_favor
+    a = {
+            "Año" : pos["Año"],
+            "Código sector económico": pos["Código sector económico" ],
+            "Nombre sector económico": pos["Nombre sector económico"], 
+            "Código subsector económico": pos["Código subsector económico"],
+            "Nombre subsector económico" : pos["Nombre subsector económico"],                             
+            "Total de descuentos tributarios del subsector economico": None,
+            "Total ingresos netos del subsector economico": None,
+            "Total costos y gastos del subsector economico":None,
+            "Total saldo a pagar del subsector economico": None,
+            "Total saldo a favor del subsector economico": None
+    }
+    a['Total de descuentos tributarios del subsector economico'] = primer
+    a["Total ingresos netos del subsector economico"]=mayor_ingresos
+    a["Total costos y gastos del subsector economico"]= mayor_gastos
+    a["Total saldo a pagar del subsector economico"]= mayor_saldo_a_pagar
+    a["Total saldo a favor del subsector economico"]=mayor_saldo_a_favor
+    lt.addFirst(final_list,a)  
 
 
             
@@ -287,7 +350,7 @@ def cmp_mayor_anio(anio1,anio2):
     if(anio1["Año"] > anio2["Año"]):
         return True
     elif(anio1["Año"] == anio2["Año"]):
-        if(int(anio1["Código subsector económico"]) < int(anio2["Código subsector económico"])):
+        if(int(anio1["Código subsector económico"]) > int(anio2["Código subsector económico"])):
             return True
     else:
         return False
