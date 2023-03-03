@@ -198,13 +198,20 @@ def req_5(data_structs):
                 starter = descuentoi 
                 elem = i 
         elif(anio!= start):
-            lt.addFirst(final_list,pos)
+            d = {
+            "total saldo a favor" : pos['total saldo a favor'],
+            "total desucento tributario": None
+            }
+            d['total descuento tributario'] = primer
+            lt.addFirst(final_list,d)
             start =  anio
             code_first = codei
             suma = descuentoi
             elem = i
             primer = descuentoi
-    lt.addFirst(final_list,pos)        
+    lt.addFirst(final_list,pos)  
+
+
             
             
                 
