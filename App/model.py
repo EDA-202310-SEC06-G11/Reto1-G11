@@ -109,7 +109,17 @@ def req_1(data_structs):
     Función que soluciona el requerimiento 1
     """
     # TODO: Realizar el requerimiento 1
-    pass
+    data=data_structs["data"]
+    make = merg.sort(data,cmp_mayor_saldo_total_a_pagar)
+    new_list=lt.newList("ARRAY_LIST")
+    start=""
+    for i in lt.iterator(make):
+        anio=i["Año"]
+        if(anio!= start  ):
+            lt.addLast(new_list,i)
+            start=anio
+    
+    return new_list
 
 
 def req_2(data_structs):
@@ -117,7 +127,17 @@ def req_2(data_structs):
     Función que soluciona el requerimiento 2
     """
     # TODO: Realizar el requerimiento 2
-    pass
+    data=data_structs["data"]
+    make = merg.sort(data,cmp_mayor_saldo_total_a_favor)
+    new_list=lt.newList("ARRAY_LIST")
+    start=""
+    for i in lt.iterator(make):
+        anio=i["Año"]
+        if(anio!= start):
+            lt.addLast(new_list,i)
+            start=anio
+    
+    return new_list
 
 
 def req_3(data_structs):
@@ -140,8 +160,59 @@ def req_5(data_structs):
     """
     Función que soluciona el requerimiento 5
     """
+    
+    
     # TODO: Realizar el requerimiento 5
-    pass
+    data = data_structs["data"]
+    sorted =merg.sort(data,cmp_mayor_anio)
+    final_list=lt.newList("ARRAY_LIST")
+    start=lt.firstElement(sorted)["Año"]
+    code_first=lt.firstElement(sorted)["Código subsector económico"]
+    suma=0
+    starter=0
+    primer =0
+    
+    for i in lt.iterator(sorted):
+        anio=i["Año"]
+        descuentoi=int(i["Descuentos tributarios"])
+        codei = i["Código subsector económico"]
+        if(anio== start):
+            start=anio
+            if(codei==code_first): 
+                suma+=descuentoi 
+                code_first = codei 
+                if(descuentoi>=starter): 
+                    starter=descuentoi 
+                    elem=i  
+                
+            elif(codei!=code_first): 
+                
+                code_first = codei 
+                if(suma  >= primer ):
+                    primer = suma 
+                    pos = elem 
+                if(descuentoi >= primer): 
+                    primer = descuentoi   
+                    pos = i               
+                suma=descuentoi 
+                starter = descuentoi 
+                elem = i 
+        elif(anio!= start):
+            lt.addFirst(final_list,pos)
+            start =  anio
+            code_first = codei
+            suma = descuentoi
+            elem = i
+            primer = descuentoi
+    lt.addFirst(final_list,pos)        
+            
+            
+                
+                
+    
+    return final_list
+    #return final_list
+    
 
 
 def req_6(data_structs):
@@ -149,7 +220,9 @@ def req_6(data_structs):
     Función que soluciona el requerimiento 6
     """
     # TODO: Realizar el requerimiento 6
-    pass
+    data = data_structs["data"]
+    lt.changeInfo(data,1["Año"],12 )
+    return data
 
 
 def req_7(data_structs):
@@ -202,6 +275,16 @@ def sort(data_structs):
     Función encargada de ordenar la lista con los datos
     """
     sa.sort(data_structs["data"], sort_criteria)
+    
+def cmp_mayor_anio(anio1,anio2):
+    if(anio1["Año"] > anio2["Año"]):
+        return True
+    elif(anio1["Año"] == anio2["Año"]):
+        if(int(anio1["Código subsector económico"]) < int(anio2["Código subsector económico"])):
+            return True
+    else:
+        return False
+        
 
 def cmp_impuestos_by_anio_CAE(impuesto1, impuesto2):
     """
@@ -223,7 +306,28 @@ def cmp_impuestos_by_anio_CAE(impuesto1, impuesto2):
             return True
     else:
         return False
-
+    
+def cmp_mayor_saldo_total_a_pagar(act_1,act_2):
+    
+    
+    if(act_1["Año"] < act_2["Año"]):
+        return True
+    elif(act_1["Año"] == act_2["Año"]):
+        if(int(act_1["Total saldo a pagar"]) > int(act_2["Total saldo a pagar"])):
+            return True
+    else:
+        return False
+def cmp_mayor_saldo_total_a_favor(act_1,act_2):
+    
+    
+    if(act_1["Año"] < act_2["Año"]):
+        return True
+    elif(act_1["Año"] == act_2["Año"]):
+        if(int(act_1["Total saldo a favor"]) > int(act_2["Total saldo a favor"])):
+            return True
+    else:
+        return False
+    
 def ordenamiento(order_tipo, data):
     if order_tipo=="selection":
         data=se.sort(data, cmp_impuestos_by_anio_CAE)
@@ -235,7 +339,7 @@ def ordenamiento(order_tipo, data):
         data=ins.sort(data, cmp_impuestos_by_anio_CAE)
         return data
     elif order_tipo=="merge":
-        data=merg.sort(data, cmp_impuestos_by_anio_CAE)
+        data=merg.sort(data, cmp_mayor_saldo_total_a_pagar)
         return data
     elif order_tipo=="quick":
         data=quk.sort(data, cmp_impuestos_by_anio_CAE)
