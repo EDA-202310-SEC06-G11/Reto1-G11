@@ -148,6 +148,7 @@ def print_req_8(control):
 # Se crea el controlador asociado a la vista
 #control = new_controller()
 
+
 # main del reto
 if __name__ == "__main__":
     """
