@@ -129,12 +129,12 @@ def print_req_6(control):
     print(controller.req_6(control))
 
 
-def print_req_7(control):
+def print_req_7(control,top,a_inicial,a_final):
     """
         Función que imprime la solución del Requerimiento 7 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 7
-    print(controller.req_7(control))
+    print(controller.req_7(control,top,a_inicial,a_final))
 
 
 def print_req_8(control):
@@ -216,7 +216,10 @@ if __name__ == "__main__":
                 print_req_6(control)
 
             elif int(inputs) == 8:
-                print_req_7(control)
+                top = int(input('ingrese el N top que desea buscar: '))
+                a_inicial = input('ingrese el año inicial: ')
+                a_final = input('ingrese el año final: ')
+                print_req_7(control,top,a_inicial,a_final)
 
             elif int(inputs) == 9:
                 print_req_8(control)

@@ -139,12 +139,12 @@ def req_6(control):
     return req_6
 
 
-def req_7(control):
+def req_7(control,top,a_inicial,a_final):
     """
     Retorna el resultado del requerimiento 7
     """
     # TODO: Modificar el requerimiento 7
-    req_7 = model.req_7(control["model"])
+    req_7 = model.req_7(control["model"],top,a_inicial,a_final)
     return req_7
 
 

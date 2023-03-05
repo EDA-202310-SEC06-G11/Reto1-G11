@@ -295,12 +295,25 @@ def req_6(data_structs):
     return data
 
 
-def req_7(data_structs):
+def req_7(data_structs, top, a_inicial, a_final):
     """
     Función que soluciona el requerimiento 7
     """
     # TODO: Realizar el requerimiento 7
-    pass
+    d = lt.newList('ARRAY_LIST')
+    catalog = data_structs['data']
+    sorted = merg.sort(catalog, cmp_anio_totalcostosygastos)
+    for i in lt.iterator(sorted):
+        if i['Año']>= a_inicial:
+            if i['Año']<= a_final:
+                lt.addLast(d,i)
+
+    s_list = lt.subList(d,1,top)
+    return s_list
+
+
+
+    
 
 
 def req_8(data_structs):
@@ -414,6 +427,15 @@ def ordenamiento(order_tipo, data):
     elif order_tipo=="quick":
         data=quk.sort(data, cmp_impuestos_by_anio_CAE)
         return data
+    
+def cmp_anio_totalcostosygastos(case1, case2):
+    if(case1["Año"] > case2["Año"]):
+        return True
+    elif(case1["Año"] == case2["Año"]):
+        if(case1["Total costos y gastos"] > case2["Total costos y gastos"]):
+            return True
+    else:
+        return False
 
 def primeros_ultimos(data):
     dato1=lt.getElement(data,1)
