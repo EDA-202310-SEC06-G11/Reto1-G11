@@ -168,7 +168,7 @@ def req_5(data_structs):
     final_list=lt.newList("ARRAY_LIST")
     start=lt.firstElement(sorted)["Año"]
     code_first=lt.firstElement(sorted)["Código subsector económico"]
-    suma=-1
+    suma=0
     starter=0
     primer =0
     suma_ingresos=0
@@ -281,7 +281,7 @@ def req_5(data_structs):
                 
     
     return final_list
-    #return final_list
+    
     
 
 
@@ -306,6 +306,8 @@ def req_6(data_structs,anio):
     menor_ingresos = int(lt.firstElement(list_of_year)["Total ingresos netos"]) 
     listaPrueba = lt.newList("ARRAY_LIST")
     listaMayorSubsector = lt.newList("ARRAY_LIST")
+    listaMenorSubsector = lt.newList("ARRAY_LIST")
+    listaFinal = lt.newList("ARRAY_LIST")
     menor =lt.firstElement(list_of_year)
     contador =0
     for i in lt.iterator(list_of_year):
@@ -371,6 +373,16 @@ def req_6(data_structs,anio):
             mayor_sub["Actividad economica que menos aporto"]=menor_actividad
             lt.addLast(listaMayorSubsector,mayor_sub)
             
+            menor_sub = diccionarios_req_6()[1]
+            menor_sub["Código subsector económico"]=menor["Código subsector económico"]
+            menor_sub["Nombre subsector económico"]=menor["Nombre subsector económico"]
+            menor_sub["Total ingresos netos del subsector economico"]= suma_ingresos
+            menor_sub["Total costos y gastos del subsector economico"]=suma_costos
+            menor_sub["Total saldo a pagar del subsector economico"] = suma_saldo_pagar
+            menor_sub["Total saldo a favor del subsector economico"] = suma_saldo_favor
+            menor_sub["Actividad economica que mas aporto"] =mayor_actividad
+            menor_sub["Actividad economica que menos aporto"]=menor_actividad
+            lt.addLast(listaMenorSubsector,menor_sub)
             #---------------------------------
             codigo_start= codigo 
             suma_ingresos = ingresos
@@ -421,11 +433,22 @@ def req_6(data_structs,anio):
             mayor_sub["Actividad economica que menos aporto"]=menor_actividad
             lt.addLast(listaMayorSubsector,mayor_sub)
             
-           
+            menor_sub = diccionarios_req_6()[1]
+            menor_sub["Código subsector económico"]=menor["Código subsector económico"]
+            menor_sub["Nombre subsector económico"]=menor["Nombre subsector económico"]
+            menor_sub["Total ingresos netos del subsector economico"]= suma_ingresos
+            menor_sub["Total costos y gastos del subsector economico"]=suma_costos
+            menor_sub["Total saldo a pagar del subsector economico"] = suma_saldo_pagar
+            menor_sub["Total saldo a favor del subsector economico"] = suma_saldo_favor
+            menor_sub["Actividad economica que mas aporto"] =mayor_actividad
+            menor_sub["Actividad economica que menos aporto"]=menor_actividad
+            lt.addLast(listaMenorSubsector,menor_sub)
             
             
-            
-    return listaPrueba , listaMayorSubsector
+    lt.addLast(listaFinal,listaPrueba)
+    lt.addLast(listaFinal,listaMayorSubsector)
+    lt.addLast(listaFinal,listaMenorSubsector)
+    return listaFinal
 
 
 def req_7(data_structs):
@@ -434,7 +457,6 @@ def req_7(data_structs):
     """
     # TODO: Realizar el requerimiento 7
     #PRUEBAS 
-    
     pass
 
 
