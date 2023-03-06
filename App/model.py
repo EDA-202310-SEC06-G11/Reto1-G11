@@ -285,14 +285,147 @@ def req_5(data_structs):
     
 
 
-def req_6(data_structs):
+def req_6(data_structs,anio):
     """
     Función que soluciona el requerimiento 6
     """
     # TODO: Realizar el requerimiento 6
+    
     data = data_structs["data"]
-    lt.changeInfo(data,1["Año"],12 )
-    return data
+    list_sort=merg.sort(data,cmp_mayor_código_del_sector_económico)
+    list_of_year=lt.newList("ARRAY_LIST")
+    for i in lt.iterator(list_sort):
+        if(anio==i["Año"]):
+            lt.addLast(list_of_year,i)
+    codigo_start=lt.firstElement(list_of_year)["Código sector económico"]
+    suma_ingresos=0
+    suma_costos=0
+    suma_saldo_pagar=0
+    suma_saldo_favor=0
+    mayor_ingresos = 0
+    menor_ingresos = int(lt.firstElement(list_of_year)["Total ingresos netos"]) 
+    listaPrueba = lt.newList("ARRAY_LIST")
+    listaMayorSubsector = lt.newList("ARRAY_LIST")
+    menor =lt.firstElement(list_of_year)
+    contador =0
+    for i in lt.iterator(list_of_year):
+        codigo = i["Código sector económico"]
+        ingresos = int(i["Total ingresos netos"])
+        costos =int(i["Total costos y gastos"])
+        saldo_pagar=int(i["Total saldo a pagar"])
+        saldo_favor=int(i["Total saldo a favor"])
+        contador+=1
+        if(codigo_start==codigo):
+            codigo_start=codigo
+            suma_ingresos+=ingresos
+            suma_costos+=costos
+            suma_saldo_pagar+=saldo_pagar
+            suma_saldo_favor+=saldo_favor
+            if(ingresos >= mayor_ingresos):
+                mayor_ingresos= ingresos
+                mayor = i
+            elif(menor_ingresos>ingresos):
+                menor_ingresos = ingresos
+                menor = i 
+        elif(codigo_start!=codigo):
+            """
+            lt.addFirst(listaPrueba,menor)
+            lt.addFirst(listaPrueba,mayor)
+            """
+            dic=diccionarios_req_6()[0]
+            dic["Código sector económico"]=mayor["Código sector económico"]
+            dic["Nombre sector económico"]=mayor["Nombre sector económico"]
+            dic["Total ingresos netos del sector economico"]= suma_ingresos
+            dic["Total costos y gastos del sector economico"]=suma_costos
+            dic["Total saldo a pagar del sector economico"]=suma_saldo_pagar
+            dic["Total saldo a favor del sector economico"] = suma_saldo_favor
+            dic["Subsector economico que mas aporto"]=mayor["Código subsector económico"]
+            dic["Subsector economico que menos aporto"]=menor["Código subsector económico"] 
+            lt.addLast(listaPrueba,dic)
+            mayor_actividad =diccionarios_req_6()[2]
+            mayor_actividad["Código actividad económica"]=mayor["Código actividad económica"]
+            mayor_actividad["Nombre actividad económica"]=mayor["Nombre actividad económica"]
+            mayor_actividad["Total ingresos netos"]=mayor["Total ingresos netos"]
+            mayor_actividad["Total costos y gastos"]=mayor["Total costos y gastos"]
+            mayor_actividad["Total saldo a pagar"]=mayor["Total saldo a pagar"]
+            mayor_actividad["Total saldo a favor"]=mayor["Total saldo a favor"]
+            
+            
+            menor_actividad = diccionarios_req_6()[2]
+            menor_actividad["Código actividad económica"]=menor["Código actividad económica"]
+            menor_actividad["Nombre actividad económica"]=menor["Nombre actividad económica"]
+            menor_actividad["Total ingresos netos"]=menor["Total ingresos netos"]
+            menor_actividad["Total costos y gastos"]=menor["Total costos y gastos"]
+            menor_actividad["Total saldo a pagar"]=menor["Total saldo a pagar"]
+            menor_actividad["Total saldo a favor"]=menor["Total saldo a favor"]
+            
+            
+            mayor_sub = diccionarios_req_6()[1]
+            mayor_sub["Código subsector económico"]=mayor["Código subsector económico"]
+            mayor_sub["Nombre subsector económico"]=mayor["Nombre subsector económico"]
+            mayor_sub["Total ingresos netos del subsector economico"]= suma_ingresos
+            mayor_sub["Total costos y gastos del subsector economico"]=suma_costos
+            mayor_sub["Total saldo a pagar del subsector economico"] = suma_saldo_pagar
+            mayor_sub["Total saldo a favor del subsector economico"] = suma_saldo_favor
+            mayor_sub["Actividad economica que mas aporto"] =mayor_actividad
+            mayor_sub["Actividad economica que menos aporto"]=menor_actividad
+            lt.addLast(listaMayorSubsector,mayor_sub)
+            
+            #---------------------------------
+            codigo_start= codigo 
+            suma_ingresos = ingresos
+            suma_costos = costos
+            suma_saldo_pagar = saldo_pagar
+            suma_saldo_favor = saldo_favor
+            mayor_ingresos = ingresos
+            menor_ingresos = ingresos
+            mayor = i 
+            menor = i 
+        if(contador==lt.size(list_of_year)):
+            dicc=diccionarios_req_6()[0]
+            dicc["Código sector económico"]=mayor["Código sector económico"]
+            dicc["Nombre sector económico"]=mayor["Nombre sector económico"]
+            dicc["Total ingresos netos del sector economico"]= suma_ingresos
+            dicc["Total costos y gastos del sector economico"]=suma_costos
+            dicc["Total saldo a pagar del sector economico"]=suma_saldo_pagar
+            dicc["Total saldo a favor del sector economico"] = suma_saldo_favor
+            dicc["Subsector economico que mas aporto"]=mayor["Código subsector económico"]
+            dicc["Subsector economico que menos aporto"]=menor["Código subsector económico"] 
+            lt.addLast(listaPrueba,dicc)
+            mayor_actividad =diccionarios_req_6()[2]
+            mayor_actividad["Código actividad económica"]=mayor["Código actividad económica"]
+            mayor_actividad["Nombre actividad económica"]=mayor["Nombre actividad económica"]
+            mayor_actividad["Total ingresos netos"]=mayor["Total ingresos netos"]
+            mayor_actividad["Total costos y gastos"]=mayor["Total costos y gastos"]
+            mayor_actividad["Total saldo a pagar"]=mayor["Total saldo a pagar"]
+            mayor_actividad["Total saldo a favor"]=mayor["Total saldo a favor"]
+            
+            
+            menor_actividad = diccionarios_req_6()[2]
+            menor_actividad["Código actividad económica"]=menor["Código actividad económica"]
+            menor_actividad["Nombre actividad económica"]=menor["Nombre actividad económica"]
+            menor_actividad["Total ingresos netos"]=menor["Total ingresos netos"]
+            menor_actividad["Total costos y gastos"]=menor["Total costos y gastos"]
+            menor_actividad["Total saldo a pagar"]=menor["Total saldo a pagar"]
+            menor_actividad["Total saldo a favor"]=menor["Total saldo a favor"]
+            
+            
+            mayor_sub = diccionarios_req_6()[1]
+            mayor_sub["Código subsector económico"]=mayor["Código subsector económico"]
+            mayor_sub["Nombre subsector económico"]=mayor["Nombre subsector económico"]
+            mayor_sub["Total ingresos netos del subsector economico"]= suma_ingresos
+            mayor_sub["Total costos y gastos del subsector economico"]=suma_costos
+            mayor_sub["Total saldo a pagar del subsector economico"] = suma_saldo_pagar
+            mayor_sub["Total saldo a favor del subsector economico"] = suma_saldo_favor
+            mayor_sub["Actividad economica que mas aporto"] =mayor_actividad
+            mayor_sub["Actividad economica que menos aporto"]=menor_actividad
+            lt.addLast(listaMayorSubsector,mayor_sub)
+            
+           
+            
+            
+            
+    return listaPrueba , listaMayorSubsector
 
 
 def req_7(data_structs):
@@ -300,6 +433,14 @@ def req_7(data_structs):
     Función que soluciona el requerimiento 7
     """
     # TODO: Realizar el requerimiento 7
+    #PRUEBAS 
+    data = data_structs["data"]
+    tamanio = lt.size(data)
+    contar =0
+    for i in lt.iterator(data):
+        contar+=1
+    
+    return  tamanio == contar
     pass
 
 
@@ -310,6 +451,36 @@ def req_8(data_structs):
     # TODO: Realizar el requerimiento 8
     pass
 
+def diccionarios_req_6():
+    dic ={
+                "Código sector económico":None,
+                "Nombre sector económico": None,
+                "Total ingresos netos del sector economico": None,
+                "Total costos y gastos del sector economico": None,
+                "Total saldo a pagar del sector economico":None,
+                "Total saldo a favor del sector economico":None,
+                "Subsector economico que mas aporto": None,
+                "Subsector economico que menos aporto": None
+            }
+    mayores_subctores={
+                "Código subsector económico":None,
+                "Nombre subsector económico":None,
+                "Total ingresos netos del subsector economico":None,
+                "Total costos y gastos del subsector economico":None,
+                "Total saldo a pagar del subsector economico":None,
+                "Total saldo a favor del subsector economico":None,
+                "Actividad economica que mas aporto":None,
+                "Actividad economica que menos aporto":None
+            }
+    actividades ={
+        "Código actividad económica":None,
+        "Nombre actividad económica":None,
+        "Total ingresos netos":None,
+        "Total costos y gastos":None,
+        "Total saldo a pagar":None,
+        "Total saldo a favor":None
+    }
+    return dic ,mayores_subctores , actividades
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 
@@ -398,6 +569,14 @@ def cmp_mayor_saldo_total_a_favor(act_1,act_2):
     else:
         return False
     
+def cmp_mayor_código_del_sector_económico(sector1,sector2):
+    if(sector1["Año"] > sector2["Año"]):
+        return True
+    elif(sector1["Año"] == sector2["Año"]):
+        if(int(sector1["Código sector económico"]) < int(sector2["Código sector económico"])):
+            return True
+    else:
+        return False
 def ordenamiento(order_tipo, data):
     if order_tipo=="selection":
         data=se.sort(data, cmp_impuestos_by_anio_CAE)
