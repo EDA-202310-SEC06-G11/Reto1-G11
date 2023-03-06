@@ -153,7 +153,121 @@ def req_4(data_structs):
     Función que soluciona el requerimiento 4
     """
     # TODO: Realizar el requerimiento 4
-    pass
+    data= data_structs["data"]
+    sorted=merg.sort(data,cmp_mayor_anio)
+    final_list= lt.newList("ARRAY_LIST")
+    start=lt.firstElement(sorted)["Año"]
+    code_first=lt.firstElement(sorted)["Código subsector económico"]
+    starter=0
+    primer=0
+    suma_total_costosygastos_nomina=0
+    suma_total_ingresosnetos=0
+    suma_total_costosygastos=0
+    suma_total_afavor=0
+    suma_total_apagar=0
+    for i in lt.iterator(sorted):
+        anio=i["Año"]
+        costosygastos=int(i["Costos y gastos nómina"])
+        total_ingresosnetos=int(i["Total ingresos netos"])
+        total_costosygastos =int(i["Total costos y gastos"])
+        codei = i["Código subsector económico"]
+        total_apagar=int(i["Total saldo a pagar"])
+        total_afavor=int(i["Total saldo a favor"])
+        if(anio== start):
+            start=anio
+            if(codei==code_first):
+                suma_total_costosygastos_nomina+=costosygastos
+                suma_total_ingresosnetos+=total_ingresosnetos
+                suma_total_costosygastos+=total_costosygastos
+                suma_total_afavor+=total_afavor
+                suma_total_apagar+=total_apagar
+                code_first=codei
+                if (costosygastos>=starter):
+                    starter=costosygastos
+                    elem=i
+            elif (codei!=code_first):
+                code_first = codei 
+                if(suma_total_costosygastos_nomina  >= primer ):
+                    primer = suma 
+                    pos = elem 
+                    mayor_ingresos=suma_total_ingresosnetos
+                    mayor_gastos = suma_total_costosygastos
+                    mayor_saldo_a_pagar=suma_total_apagar
+                    mayor_saldo_a_favor=suma_total_afavor
+                if( costosygastos>= primer): 
+                    primer = costosygastos
+                    pos = i
+                    mayor_ingresos=total_ingresosnetos 
+                    mayor_gastos=total_costosygastos
+                    mayor_saldo_a_pagar=total_apagar
+                    mayor_saldo_a_favor=total_afavor     
+                suma=costosygastos
+                starter=costosygastos
+                elem=i
+                suma_ingresos=total_ingresosnetos
+                suma_gastos=total_costosygastos
+                suma_saldo_a_pagar=total_apagar
+                suma_saldo_a_favor=total_afavor
+            elif(anio!= start):
+                if(suma_total_costosygastos_nomina  >= primer ):
+                    primer = suma_total_costosygastos_nomina
+                    pos = elem 
+                    mayor_ingresos=suma_ingresos
+                    mayor_gastos=suma_gastos
+                    mayor_saldo_a_pagar=suma_saldo_a_pagar
+                    mayor_saldo_a_favor=suma_saldo_a_favor   
+                     
+            d = {
+            "Año" : pos["Año"],
+            "Código sector económico": pos["Código sector económico" ],
+            "Nombre sector económico": pos["Nombre sector económico"],  
+            "Código subsector económico": pos["Código subsector económico"],  
+            "Nombre subsector económico" : pos["Nombre subsector económico"],                            
+            "Total de costos y gastos nómina del subsector economico": None,
+            "Total ingresos netos del subsector economico": None,
+            "Total costos y gastos del subsector economico":None,
+            "Total saldo a pagar del subsector economico": None,
+            "Total saldo a favor del subsector economico": None
+            }    
+            d['Total de costos y gastos nómina del subsector economico'] = primer
+            d["Total ingresos netos del subsector economico"]=mayor_ingresos
+            d["Total costos y gastos del subsector economico"]= mayor_gastos
+            d["Total saldo a pagar del subsector economico"]= mayor_saldo_a_pagar
+            d["Total saldo a favor del subsector economico"]=mayor_saldo_a_favor
+            lt.addFirst(final_list,d)
+            start =  anio
+            code_first = codei
+            suma = costosygastos
+            elem = i 
+            primer = costosygastos
+            suma_ingresos= total_ingresosnetos
+            suma_gastos= total_costosygastos
+            suma_saldo_a_pagar= total_apagar
+            suma_saldo_a_favor=total_afavor     
+    a = {
+            "Año" : pos["Año"],
+            "Código sector económico": pos["Código sector económico" ],
+            "Nombre sector económico": pos["Nombre sector económico"], 
+            "Código subsector económico": pos["Código subsector económico"],
+            "Nombre subsector económico" : pos["Nombre subsector económico"],                             
+            "Total de costos y gastos nómina del subsector economico": None,
+            "Total ingresos netos del subsector economico": None,
+            "Total costos y gastos del subsector economico":None,
+            "Total saldo a pagar del subsector economico": None,
+            "Total saldo a favor del subsector economico": None
+    }
+    a['Total de costos y gastos nómina del subsector economico'] = primer
+    a["Total ingresos netos del subsector economico"]=mayor_ingresos
+    a["Total costos y gastos del subsector economico"]= mayor_gastos
+    a["Total saldo a pagar del subsector economico"]= mayor_saldo_a_pagar
+    a["Total saldo a favor del subsector economico"]=mayor_saldo_a_favor
+    lt.addFirst(final_list,a)  
+    return final_list
+    #return final_list            
+                
+                
+                
+            
 
 
 def req_5(data_structs):
@@ -213,7 +327,7 @@ def req_5(data_structs):
                     mayor_gastos=total_gastos
                     mayor_saldo_a_pagar=total_saldo_a_pagar
                     mayor_saldo_a_favor=total_saldo_a_favor            
-                suma=descuentoi # 2977
+                suma=descuentoi 
                 starter = descuentoi 
                 elem = i 
                 suma_ingresos=total_ingresos
