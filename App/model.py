@@ -434,13 +434,7 @@ def req_7(data_structs):
     """
     # TODO: Realizar el requerimiento 7
     #PRUEBAS 
-    data = data_structs["data"]
-    tamanio = lt.size(data)
-    contar =0
-    for i in lt.iterator(data):
-        contar+=1
     
-    return  tamanio == contar
     pass
 
 
