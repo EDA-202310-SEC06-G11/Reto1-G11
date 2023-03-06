@@ -262,6 +262,8 @@ def req_4(data_structs):
     a["Total saldo a pagar del subsector economico"]= mayor_saldo_a_pagar
     a["Total saldo a favor del subsector economico"]=mayor_saldo_a_favor
     lt.addFirst(final_list,a)  
+   
+   
     return final_list
     #return final_list            
                 
