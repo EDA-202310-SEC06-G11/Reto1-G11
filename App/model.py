@@ -296,6 +296,8 @@ def req_5(data_structs):
     suma_gastos=0
     suma_saldo_a_pagar=0
     suma_saldo_a_favor =0
+    mayoresActividades1 = lt.newList("ARRAY_LIST")
+    mayoresActividadesFinal= lt.newList("ARRAY_LIST")
     for i in lt.iterator(sorted):
         anio=i["Año"]
         descuentoi=int(i["Descuentos tributarios"])
@@ -306,6 +308,9 @@ def req_5(data_structs):
         total_saldo_a_favor=int(i["Total saldo a favor"])
         if(anio== start):
             start=anio
+            if(descuentoi>=starter):
+                starter=descuentoi
+                lt.addLast(mayoresActividades1,i)
             if(codei==code_first): 
                 suma+=descuentoi 
                 suma_ingresos+=total_ingresos
@@ -315,12 +320,11 @@ def req_5(data_structs):
                 code_first = codei 
                 if(descuentoi>=starter): 
                     starter=descuentoi 
-                    elem=i  
-                
+                    elem=i 
             elif(codei!=code_first): 
                 
                 code_first = codei 
-                if(suma  >= primer ):
+                if(suma >= primer ):
                     primer = suma 
                     pos = elem 
                     mayor_ingresos=suma_ingresos
@@ -342,6 +346,9 @@ def req_5(data_structs):
                 suma_saldo_a_pagar=total_saldo_a_pagar
                 suma_saldo_a_favor=total_saldo_a_favor
         elif(anio!= start):
+            menores = lt.subList(mayoresActividades1,1,3)
+            mayores=lt.subList(mayoresActividades1,0,3)
+            
             if(suma  >= primer ):
                     primer = suma 
                     pos = elem 
@@ -366,6 +373,7 @@ def req_5(data_structs):
             d["Total costos y gastos del subsector economico"]= mayor_gastos
             d["Total saldo a pagar del subsector economico"]= mayor_saldo_a_pagar
             d["Total saldo a favor del subsector economico"]=mayor_saldo_a_favor
+            
             lt.addFirst(final_list,d)
             start =  anio
             code_first = codei
@@ -393,6 +401,7 @@ def req_5(data_structs):
     a["Total costos y gastos del subsector economico"]= mayor_gastos
     a["Total saldo a pagar del subsector economico"]= mayor_saldo_a_pagar
     a["Total saldo a favor del subsector economico"]=mayor_saldo_a_favor
+    #mayores =
     lt.addFirst(final_list,a)  
 
 
@@ -689,6 +698,12 @@ def cmp_impuestos_by_anio_CAE(impuesto1, impuesto2):
     elif(impuesto1["Año"] == impuesto2["Año"]):
         if(impuesto1["Código actividad económica"] > impuesto2["Código actividad económica"]):
             return True
+    else:
+        return False
+    
+def cmp_mayor_y_menor(act1,act2):
+    if(act1["Descuentos tributarios"]>act2["Descuentos tributarios"]):
+        return True
     else:
         return False
     
