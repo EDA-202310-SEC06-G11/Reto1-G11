@@ -31,8 +31,9 @@ from DISClib.Algorithms.Sorting import shellsort as sh
 from DISClib.Algorithms.Sorting import insertionsort as ins
 from DISClib.Algorithms.Sorting import mergesort as mrg
 from DISClib.Algorithms.Sorting import quicksort as qck
+import pandas as pd
 assert cf
-#from tabulate import tabulate
+from tabulate import tabulate
 
 """
 La vista se encarga de la interacción con el usuario
@@ -86,7 +87,9 @@ def print_req_1(control):
         Función que imprime la solución del Requerimiento 1 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 1
-    print(controller.req_1(control))
+    df=(controller.req_1(control))
+    widt=[2,2,3,30,2,30,3,30,None,None,None,None]
+    print(tabulate(df,df.columns,tablefmt="grid",maxcolwidths=widt))
 
 
 def print_req_2(control):
@@ -94,7 +97,9 @@ def print_req_2(control):
         Función que imprime la solución del Requerimiento 2 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 2
-    print(controller.req_2(control))
+    df=(controller.req_2(control))
+    widt=[2,2,3,30,2,30,3,30,None,None,None,None]
+    print(tabulate(df,df.columns,tablefmt="grid",maxcolwidths=widt))
 
 
 def print_req_3(control):
@@ -110,16 +115,22 @@ def print_req_4(control):
         Función que imprime la solución del Requerimiento 4 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 4
-    print(controller.req_4(control))
-
+    df=controller.req_4(control)
+    widt = [2,4,3,30,2,30,6,6,6,6,6]
+    print(tabulate(df,df.columns,tablefmt="grid",maxcolwidths=widt,))
 
 def print_req_5(control):
     """
         Función que imprime la solución del Requerimiento 5 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 5
-    print(controller.req_5(control))
-
+    df=controller.req_5(control)[0]
+    df2=controller.req_5(control)[1]
+    
+    widt = [2,4,3,30,2,30,6,6,6,6,6]
+    print(tabulate(df,df.columns,tablefmt="grid",maxcolwidths=widt))
+    print("------------------------Otras-Tablas---------------------------------")
+    print(tabulate(df2,df2.columns,tablefmt="grid"))
 
 def print_req_6(control,anio):
     """
@@ -127,6 +138,7 @@ def print_req_6(control,anio):
     """
     # TODO: Imprimir el resultado del requerimiento 6
     print(controller.req_6(control,anio))
+    #print(tabulate(controller.req_6(control,anio), headers=["Codigo sector economico","Nombre sector economico ","Total ingresos net"]))
 
 
 def print_req_7(control,top,a_i,a_f):
@@ -177,15 +189,6 @@ if __name__ == "__main__":
                 data = load_data(control,size)
                 catalog = control['model']
                 data = catalog['data']
-                """
-                elements = data['elements']
-                size_data=lt.size(data)
-                size_ultimos3=size_data-3
-                primeros3=lt.subList(data, 0, 3)
-                ultimos3=lt.subList(data, size_ultimos3, 3)
-                print(primeros3)
-                print(ultimos3)
-                """
                 order_tipo= input("Cual tipo de ordenamiento desea ejecutar(selection,shell,insertion,merge,quick):")
                 start_time=controller.get_time()
                 list_ordenada = controller.ordenar(order_tipo,data)
