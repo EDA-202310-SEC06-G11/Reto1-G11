@@ -24,6 +24,8 @@ import config as cf
 import model
 import time
 import csv
+import pandas as pd
+from DISClib.ADT import list as lt
 
 
 """
@@ -127,7 +129,26 @@ def req_5(control):
     """
     # TODO: Modificar el requerimiento 5
     req_5 = model.req_5(control["model"])
-    return req_5
+    lista=[]
+    for i in lt.iterator(req_5):
+        columna=[]
+        columna.append(i["Año"])
+        columna.append(i["Código sector económico"])
+        columna.append(i["Nombre sector económico"])
+        columna.append(i["Código subsector económico"])
+        columna.append(i["Nombre subsector económico"])
+        columna.append(i["Total de descuentos tributarios del subsector economico"])
+        columna.append(i["Total ingresos netos del subsector economico"])
+        columna.append(i["Total costos y gastos del subsector economico"])
+        columna.append(i["Total saldo a pagar del subsector economico"])
+        columna.append(i["Total saldo a favor del subsector economico"])
+        lista.append(columna)  
+    df=pd.DataFrame(lista,columns=["Año", "Codigo sector economico", "Nombre sector economico","Codigo subsector economico",
+                                   "Nombre subsector economico","Total de descuentos tributarios del subsector economico",
+                                   "Total ingresos netos del subsector economico","Total costos y gastos del subsector economico",
+                                   "Total saldo a pagar del subsector economico ","Total saldo a favor del subsector economico"],index=None)
+    df.set_axis(labels=df.columns.str.wrap(10), axis=1, inplace=True)
+    return df
 
 
 def req_6(control,anio):
@@ -136,6 +157,8 @@ def req_6(control,anio):
     """
     # TODO: Modificar el requerimiento 6
     req_6 = model.req_6(control["model"],anio)
+    
+    
     return req_6
 
 

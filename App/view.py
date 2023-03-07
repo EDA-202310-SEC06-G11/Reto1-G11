@@ -31,8 +31,9 @@ from DISClib.Algorithms.Sorting import shellsort as sh
 from DISClib.Algorithms.Sorting import insertionsort as ins
 from DISClib.Algorithms.Sorting import mergesort as mrg
 from DISClib.Algorithms.Sorting import quicksort as qck
+import pandas as pd
 assert cf
-#from tabulate import tabulate
+from tabulate import tabulate
 
 """
 La vista se encarga de la interacción con el usuario
@@ -118,8 +119,17 @@ def print_req_5(control):
         Función que imprime la solución del Requerimiento 5 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 5
-    print(controller.req_5(control))
-
+    #print(controller.req_5(control))
+    df=controller.req_5(control)
+    widt = [2,4,3,30,2,30,6,6,6,6,6]
+    print(tabulate(df,df.columns,tablefmt="grid",maxcolwidths=widt,))
+    
+    
+    
+    
+    
+    
+    
 
 def print_req_6(control,anio):
     """
@@ -127,6 +137,7 @@ def print_req_6(control,anio):
     """
     # TODO: Imprimir el resultado del requerimiento 6
     print(controller.req_6(control,anio))
+    #print(tabulate(controller.req_6(control,anio), headers=["Codigo sector economico","Nombre sector economico ","Total ingresos net"]))
 
 
 def print_req_7(control):
