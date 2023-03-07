@@ -167,7 +167,7 @@ def req_4(data_structs):
     suma_saldo_a_favor =0
     for i in lt.iterator(sorted):
         anio=i["Año"]
-        descuentoi=int(i["Total costos y gastos nómina"])
+        descuentoi=int(i["Costos y gastos nómina"])
         total_ingresos=int(i["Total ingresos netos"])
         total_gastos =int(i["Total costos y gastos"])
         codei = i["Código subsector económico"]
@@ -224,13 +224,13 @@ def req_4(data_structs):
             "Nombre sector económico": pos["Nombre sector económico"],  
             "Código subsector económico": pos["Código subsector económico"],  
             "Nombre subsector económico" : pos["Nombre subsector económico"],                            
-            "Total de costos y gastos nómina economico": None,
+            "Total de costos y gastos nómina del subsector economico": None,
             "Total ingresos netos del subsector economico": None,
             "Total costos y gastos del subsector economico":None,
             "Total saldo a pagar del subsector economico": None,
             "Total saldo a favor del subsector economico": None
             }
-            d['Total de costos y gastos nómina subsector economico'] = primer
+            d['Total de costos y gastos nómina del subsector economico'] = primer
             d["Total ingresos netos del subsector economico"]=mayor_ingresos
             d["Total costos y gastos del subsector economico"]= mayor_gastos
             d["Total saldo a pagar del subsector economico"]= mayor_saldo_a_pagar
@@ -257,7 +257,7 @@ def req_4(data_structs):
             "Total saldo a pagar del subsector economico": None,
             "Total saldo a favor del subsector economico": None
     }
-    a['Total de costos y gastos nómina economico'] = primer
+    a['Total de costos y gastos nómina del subsector economico'] = primer
     a["Total ingresos netos del subsector economico"]=mayor_ingresos
     a["Total costos y gastos del subsector economico"]= mayor_gastos
     a["Total saldo a pagar del subsector economico"]= mayor_saldo_a_pagar
