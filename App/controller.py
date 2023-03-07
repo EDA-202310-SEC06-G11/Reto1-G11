@@ -121,7 +121,7 @@ def req_4(control):
     # TODO: Modificar el requerimiento 4
     req_4= model.req_4(control["model"])
     lista=[]
-    for i in lt.iterator(req_5):
+    for i in lt.iterator(req_4):
         columna=[]
         columna.append(i["Año"])
         columna.append(i["Código sector económico"])
