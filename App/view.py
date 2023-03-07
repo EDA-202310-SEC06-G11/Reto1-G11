@@ -111,8 +111,9 @@ def print_req_4(control):
         Función que imprime la solución del Requerimiento 4 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 4
-    print(controller.req_4(control))
-
+    df=controller.req_4(control)
+    widt = [2,4,3,30,2,30,6,6,6,6,6]
+    print(tabulate(df,df.columns,tablefmt="grid",maxcolwidths=widt,))
 
 def print_req_5(control):
     """
