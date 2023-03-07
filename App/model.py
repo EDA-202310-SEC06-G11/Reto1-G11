@@ -145,9 +145,30 @@ def req_3(data_structs):
     Función que soluciona el requerimiento 3
     """
     # TODO: Realizar el requerimiento 3
-    pass
+    data = data_structs["data"]
+    n = lt.newList('ARRAY_LIST')
+    list_order = merg.sort(data, cmp_anio_codigo_costosgastos)
+    codigo_al= lt.getElement(list_order,1)
+    codigo_pas = lt.getElement(list_order,1)
+    anio = None
+    for i in lt.iterator(list_order):
+        if i["Año"] != anio:
+                lt.addLast(n, codigo_pas)
+                anio = i["Año"]
 
-
+        elif i['Año'] == anio:
+                if i['Código subsector económico'] != codigo_al['Código subsector económico']:
+                    if codigo_pas['Total retenciones'] < codigo_al['Total retenciones']:
+                        codigo_pas = codigo_al
+                    codigo_al = i
+                elif i['Código subsector económico'] == codigo_al['Código subsector económico']:
+                    codigo_al['Total ingresos netos'] += i['Total ingresos netos']
+                    codigo_al['Total costos y gastos'] += i['Total costos y gastos']
+                    codigo_al['Total saldo a pagar'] += i['Total saldo a pagar']
+                    codigo_al['Total saldo a favor'] += i['Total saldo a favor']
+                    codigo_al['Total retenciones'] += i['Total retenciones']
+        
+    return n
 def req_4(data_structs):
     """
     Función que soluciona el requerimiento 4
@@ -572,20 +593,44 @@ def req_6(data_structs,anio):
     return listaFinal
 
 
-def req_7(data_structs):
+def req_7(data_structs,top,a_i,a_f):
     """
     Función que soluciona el requerimiento 7
     """
     # TODO: Realizar el requerimiento 7
     #PRUEBAS 
     data = data_structs["data"]
-    tamanio = lt.size(data)
-    contar =0
-    for i in lt.iterator(data):
-        contar+=1
+    ñ = lt.newList('ARRAY_LIST')
+    list_order = merg.sort(data, cmp_anio_codigo_costosgastos)
+    codigo_al= lt.getElement(list_order,1)
+    año = ''
+    for i in lt.iterator(list_order):
+        if i["Año"]>=a_i and i["Año"]<=a_f:
+            if i["Año"] != año:
+                lt.addLast(ñ, i)
+                año = i["Año"]
+
+            elif i['Año'] == año:
+                if i['Código actividad económica'] != codigo_al['Código actividad económica']:
+                    lt.addLast(ñ,codigo_al)
+                    codigo_al = i
+                elif i['Código actividad económica'] == codigo_al['Código actividad económica']:
+                    codigo_al['Total ingresos netos'] += i['Total ingresos netos']
+                    codigo_al['Total costos y gastos'] += i['Total costos y gastos']
+                    codigo_al['Total saldo a pagar'] += i['Total saldo a pagar']
+                    codigo_al['Total saldo a favor'] += i['Total saldo a favor']
+    lt.addLast(ñ,codigo_al)
+    lt.deleteElement(ñ,1)
+    new_order = merg.sort(ñ,cmp_gastos)
+    size = lt.size(new_order)
+    if size<top:
+        print('no hay suficientes datos para el top')
+        return new_order
     
-    return  tamanio == contar
-    
+    elif size >= top:
+        s_list = lt.subList(new_order,1,top)
+        return s_list
+
 
 
 def req_8(data_structs):
@@ -732,11 +777,27 @@ def ordenamiento(order_tipo, data):
         data=ins.sort(data, cmp_impuestos_by_anio_CAE)
         return data
     elif order_tipo=="merge":
-        data=merg.sort(data, cmp_mayor_saldo_total_a_pagar)
+        data=merg.sort(data, cmp_impuestos_by_anio_CAE)
         return data
     elif order_tipo=="quick":
         data=quk.sort(data, cmp_impuestos_by_anio_CAE)
         return data
+    
+def cmp_anio_codigo_costosgastos(c1,c2):
+         
+    if(c1["Año"] > c2["Año"]):
+        return True
+    elif(c1["Año"] == c2["Año"]):
+        if(c1["Código actividad económica"] > c2["Código actividad económica"]):
+            return True
+    else:
+        return False
+    
+def cmp_gastos(c1,c2):
+    if(int(c1["Total costos y gastos"]) > int(c2["Total costos y gastos"])):
+        return True
+    else:
+        False
 
 def primeros_ultimos(data):
     dato1=lt.getElement(data,1)

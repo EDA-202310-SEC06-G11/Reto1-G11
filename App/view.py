@@ -129,12 +129,12 @@ def print_req_6(control,anio):
     print(controller.req_6(control,anio))
 
 
-def print_req_7(control):
+def print_req_7(control,top,a_i,a_f):
     """
         Función que imprime la solución del Requerimiento 7 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 7
-    print(controller.req_7(control))
+    print(controller.req_7(control,top,a_i,a_f))
 
 
 def print_req_8(control):
@@ -195,7 +195,7 @@ if __name__ == "__main__":
                 prim_ultimos = controller.prim_ult(list_ordenada)
                 
                 #print(dato1,dato2,dato3,datoult3,datoult2,dato0)
-                print(prim_ultimos)
+                #print(prim_ultimos)
 
             elif int(inputs) == 2:
                 print_req_1(control)
@@ -217,7 +217,10 @@ if __name__ == "__main__":
                 print_req_6(control,anio)
 
             elif int(inputs) == 8:
-                print_req_7(control)
+                top= int(input('ingrese el top que desea buscar: '))
+                a_i = input('ingrese el año inicial: ')
+                a_f= input('ingrese el año final: ')
+                print_req_7(control,top,a_i,a_f)
 
             elif int(inputs) == 9:
                 print_req_8(control)
