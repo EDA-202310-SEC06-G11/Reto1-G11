@@ -122,7 +122,7 @@ def print_req_5(control):
     #print(controller.req_5(control))
     df=controller.req_5(control)
     widt = [2,4,3,30,2,30,6,6,6,6,6]
-    print(tabulate(df,df.columns,tablefmt="grid",maxcolwidths=widt,))
+    print(tabulate(df,df.columns,tablefmt="grid",maxcolwidths=widt))
     
     
     

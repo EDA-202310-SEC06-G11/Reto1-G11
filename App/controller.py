@@ -130,6 +130,7 @@ def req_5(control):
     # TODO: Modificar el requerimiento 5
     req_5 = model.req_5(control["model"])
     lista=[]
+    
     for i in lt.iterator(req_5):
         columna=[]
         columna.append(i["Año"])
