@@ -297,7 +297,6 @@ def req_5(data_structs):
     suma_saldo_a_pagar=0
     suma_saldo_a_favor =0
     mayoresActividades1 = lt.newList("ARRAY_LIST")
-    mayoresActividadesFinal= lt.newList("ARRAY_LIST")
     for i in lt.iterator(sorted):
         anio=i["Año"]
         descuentoi=int(i["Descuentos tributarios"])
@@ -348,7 +347,11 @@ def req_5(data_structs):
         elif(anio!= start):
             menores = lt.subList(mayoresActividades1,1,3)
             mayores=lt.subList(mayoresActividades1,0,3)
-            
+            lt.exchange(menores,1,3)
+            lt.exchange(mayores,1,3)
+            for i in lt.iterator(menores):
+                lt.addLast(mayores,i)
+            mayoresActividades1=lt.newList("ARRAY_LIST")
             if(suma  >= primer ):
                     primer = suma 
                     pos = elem 
@@ -401,7 +404,13 @@ def req_5(data_structs):
     a["Total costos y gastos del subsector economico"]= mayor_gastos
     a["Total saldo a pagar del subsector economico"]= mayor_saldo_a_pagar
     a["Total saldo a favor del subsector economico"]=mayor_saldo_a_favor
-    #mayores =
+    menores = lt.subList(mayoresActividades1,1,3)
+    mayores=lt.subList(mayoresActividades1,0,3)
+    lt.exchange(menores,1,3)
+    lt.exchange(mayores,1,3)
+    for i in lt.iterator(menores):
+        lt.addLast(mayores,i)
+    
     lt.addFirst(final_list,a)  
 
 
