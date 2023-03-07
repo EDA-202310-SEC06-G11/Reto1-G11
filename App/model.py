@@ -167,7 +167,7 @@ def req_4(data_structs):
     suma_saldo_a_favor =0
     for i in lt.iterator(sorted):
         anio=i["Año"]
-        descuentoi=int(i["Costos y gastos nómina"])
+        descuentoi=int(i["Total costos y gastos nómina"])
         total_ingresos=int(i["Total ingresos netos"])
         total_gastos =int(i["Total costos y gastos"])
         codei = i["Código subsector económico"]
