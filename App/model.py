@@ -366,7 +366,6 @@ def req_5(data_structs):
                 suma_saldo_a_favor=total_saldo_a_favor
         elif(anio!= start):
             mayoresActividades1=merg.sort(mayoresActividades1,cmp_mayor_descuento_actividad)
-            print(mayoresActividades1)
             if(lt.size(mayoresActividades1)<6):
                 for act in lt.iterator(mayoresActividades1):
                     lt.addLast(lista_mayor_Act,act)
@@ -466,8 +465,8 @@ def req_6(data_structs,anio):
     suma_ingresos=0
     suma_costos=0
     suma_saldo_pagar=0
-    suma_saldo_favor=0
-    mayor_ingresos = 0
+    suma_saldo_favor=0  
+    mayor_ingresos = 0      
     menor_ingresos = int(lt.firstElement(list_of_year)["Total ingresos netos"]) 
     listaPrueba = lt.newList("ARRAY_LIST")
     listaMayorSubsector = lt.newList("ARRAY_LIST")
@@ -548,7 +547,6 @@ def req_6(data_structs,anio):
             menor_sub["Actividad economica que mas aporto"] =mayor_actividad
             menor_sub["Actividad economica que menos aporto"]=menor_actividad
             lt.addLast(listaMenorSubsector,menor_sub)
-            #---------------------------------
             codigo_start= codigo 
             suma_ingresos = ingresos
             suma_costos = costos
