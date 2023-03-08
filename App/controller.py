@@ -212,10 +212,13 @@ def req_4(control):
     Retorna el resultado del requerimiento 4
     """
     # TODO: Modificar el requerimiento 4
+    start = get_time()
     req_4 = model.req_4(control["model"])
+    end = get_time()
+    time= delta_time(start,end)
+    print(time)
     primera_lista = req_4[0]
     segunda_lista =req_4[1]
-    
     lista=[]
     lista2=[]
     df2=0
