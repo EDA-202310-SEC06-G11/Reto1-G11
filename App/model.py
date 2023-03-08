@@ -165,6 +165,8 @@ def req_4(data_structs):
     suma_gastos=0
     suma_saldo_a_pagar=0
     suma_saldo_a_favor =0
+    mayoresActividades1 = lt.newList("ARRAY_LIST")
+    lista_mayor_Act=lt.newList("ARRAY_LIST")
     for i in lt.iterator(sorted):
         anio=i["Año"]
         descuentoi=int(i["Costos y gastos nómina"])
@@ -211,6 +213,22 @@ def req_4(data_structs):
                 suma_saldo_a_pagar=total_saldo_a_pagar
                 suma_saldo_a_favor=total_saldo_a_favor
         elif(anio!= start):
+            mayoresActividades1=merg.sort(mayoresActividades1,cmp_mayor_costosnomina_actividad)
+            print(mayoresActividades1)
+            if(lt.size(mayoresActividades1)<6):
+                for act in lt.iterator(mayoresActividades1):
+                    lt.addLast(lista_mayor_Act,act)
+            else:
+                mayores = lt.subList(mayoresActividades1,1,3)
+                menores=lt.subList(mayoresActividades1,-3,3)
+                for act1 in lt.iterator(mayores):
+                    lt.addLast(lista_mayor_Act,act1)
+                for act2 in lt.iterator(menores):
+                    lt.addLast(lista_mayor_Act,act2)
+                
+            
+            mayoresActividades1=lt.newList("ARRAY_LIST")
+            lt.addLast(mayoresActividades1,i)
             if(suma  >= primer ):
                     primer = suma 
                     pos = elem 
@@ -262,7 +280,20 @@ def req_4(data_structs):
     a["Total costos y gastos del subsector economico"]= mayor_gastos
     a["Total saldo a pagar del subsector economico"]= mayor_saldo_a_pagar
     a["Total saldo a favor del subsector economico"]=mayor_saldo_a_favor
+    mayoresActividades1=merg.sort(mayoresActividades1,cmp_mayor_costosnomina_actividad)
+    if(lt.size(mayoresActividades1)<6):
+        for i in lt.iterator(mayoresActividades1):
+            lt.addLast(lista_mayor_Act,i)
+    else:
+        mayores = lt.subList(mayoresActividades1,1,3)
+        menores=lt.subList(mayoresActividades1,-3,3)
+        for i in lt.iterator(mayores):
+            lt.addLast(lista_mayor_Act,i)
+        for i in lt.iterator(menores):
+            lt.addLast(lista_mayor_Act,i)
+    
     lt.addFirst(final_list,a)  
+    return final_list , lista_mayor_Act
 
 
             
@@ -700,7 +731,11 @@ def cmp_mayor_descuento_actividad(act1,act2):
         return True
     else: 
         return False
-
+def cmp_mayor_costosnomina_actividad(act1,act2):
+    if(int(act1["Costos y gastos nómina"])) >int(act2["Costos y gastos nómina"]):
+        return True
+    else: 
+        return False
 def cmp_impuestos_by_anio_CAE(impuesto1, impuesto2):
     """
     Devuelve verdadero (True) si el año de impuesto1 es menor que el de impuesto2,
