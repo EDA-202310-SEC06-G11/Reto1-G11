@@ -87,6 +87,31 @@ def get_data(control, id):
     return data
 
 
+def print_carga_datos(data):
+    lista_datos=[]
+    for i in range(len(data)):
+        lista_datos.append(data[i])
+    lista=[]
+    print(lista_datos)
+    for i in (lista_datos):
+        columna=[]
+        columna.append(i["Año"])
+        columna.append(i["Código actividad económica"])
+        columna.append(i["Nombre actividad económica"])
+        columna.append(i["Código sector económico"])
+        columna.append(i["Nombre sector económico"])
+        columna.append(i["Código subsector económico"])
+        columna.append(i["Total ingresos netos"])
+        columna.append(i["Total costos y gastos"])
+        columna.append(i["Total saldo a pagar"])
+        columna.append(i["Total saldo a favor"])
+        lista.append(columna)
+    df=pd.DataFrame(lista,columns=["Año", "Código actividad económica", "Nombre actividad económica","Código sector económico",
+                                   "Nombre sector económico","Código subsector económico",
+                                   "Total ingresos netos","Total costos y gastos ","Total saldo a pagar","Total saldo a favor"],index=None)
+    df["Nombre sector económico"]=df["Nombre sector económico"].str.wrap(20)
+    df.set_axis(labels=df.columns.str.wrap(10), axis=1, inplace=True)
+    return df
 def req_1(control):
     """
     Retorna el resultado del requerimiento 1
@@ -368,7 +393,25 @@ def req_6(control,anio):
                                    "Actividad economica que mas aporto","Actividad economica que menos aporto"],index=None)
     df2["Nombre subsector económico"]=df2["Nombre subsector económico"].str.wrap(10)
     df2.set_axis(labels=df.columns.str.wrap(10), axis=1, inplace=True) 
-    return df ,df2
+    lista3=lt.getElement(req_6,3)
+    tabla3=[]
+    for i in lt.iterator(lista3):
+        columna=[]
+        columna.append(i["Código subsector económico"])
+        columna.append(i["Nombre subsector económico"])
+        columna.append(i["Total ingresos netos del subsector economico"])
+        columna.append(i["Total costos y gastos del subsector economico"])
+        columna.append(i["Total saldo a pagar del subsector economico"])
+        columna.append(i["Total saldo a favor del subsector economico"])
+        columna.append(i["Actividad economica que mas aporto"])
+        columna.append(i["Actividad economica que menos aporto"])
+        tabla3.append(columna)
+    df3=pd.DataFrame(tabla3,columns=["Código subsector económico", "Nombre subsector económico", "Total ingresos netos del subsector economico","Total costos y gastos del subsector economico",
+                                   "Total saldo a pagar del subsector economico","Total saldo a favor del subsector economico",
+                                   "Actividad economica que mas aporto","Actividad economica que menos aporto"],index=None)
+    df3["Nombre subsector económico"]=df3["Nombre subsector económico"].str.wrap(10)
+    df3.set_axis(labels=df.columns.str.wrap(10), axis=1, inplace=True) 
+    return df ,df2 , df3
 
 
 def req_7(control,top,a_i,a_f):

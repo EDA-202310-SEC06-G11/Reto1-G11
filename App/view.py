@@ -151,11 +151,14 @@ def print_req_6(control,anio):
     req_6=controller.req_6(control,anio)
     tabla1=req_6[0]
     tabla2=req_6[1]
+    tabla3=req_6[2]
     widt = [3,4,20,6,6,6,6,6,6]
-    widt2=  [3,2,20,6,6,6,6,6,6]
+    widt2=  [3,2,20,6,6,6,6,20,20]
     print(tabulate(tabla1,tabla1.columns,tablefmt="grid",maxcolwidths=widt))
     print("------------------------------------Economic subsector that contributed the most------------------------------------")
     print(tabulate(tabla2,tabla2.columns,tablefmt="grid",maxcolwidths=widt2))
+    print("------------------------------------Economic subsector that contributed the less------------------------------------")
+    print(tabulate(tabla3,tabla3.columns,tablefmt="grid",maxcolwidths=widt2))
     #print(tabulate(controller.req_6(control,anio), headers=["Codigo sector economico","Nombre sector economico ","Total ingresos net"]))
 
 
@@ -220,8 +223,11 @@ if __name__ == "__main__":
                 prim_ultimos = controller.prim_ult(list_ordenada)
                 
                 
-                print(prim_ultimos)
-
+                
+                datafr=controller.print_carga_datos(prim_ultimos)
+                widt=[2,2,3,30,2,30,3,None,None,None,None]
+                print(tabulate(datafr,datafr.columns,tablefmt="grid",maxcolwidths=widt))
+                
             elif int(inputs) == 2:
                 print_req_1(control)
 
