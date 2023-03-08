@@ -107,7 +107,13 @@ def print_req_3(control):
         Función que imprime la solución del Requerimiento 3 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 3
-    print(controller.req_3(control))
+    df=controller.req_3(control)[0]
+    df2=controller.req_3(control)[1]
+    
+    widt = [2,4,3,30,2,30,6,6,6,6,6]
+    print(tabulate(df,df.columns,tablefmt="grid",maxcolwidths=widt))
+    print("------------------------Otras-Tablas---------------------------------")
+    print(tabulate(df2,df2.columns,tablefmt="grid"))
 
 
 def print_req_4(control):
@@ -145,12 +151,14 @@ def print_req_6(control,anio):
     #print(tabulate(controller.req_6(control,anio), headers=["Codigo sector economico","Nombre sector economico ","Total ingresos net"]))
 
 
-def print_req_7(control):
+def print_req_7(control,top,a_i,a_f):
     """
         Función que imprime la solución del Requerimiento 7 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 7
-    print(controller.req_7(control))
+    df=controller.req_7(control,top,a_i,a_f)
+    widt = [2,4,3,30,2,30,6,6,6,6,6]
+    print(tabulate(df,df.columns,tablefmt="grid",maxcolwidths=widt))
 
 
 def print_req_8(control):
@@ -200,7 +208,9 @@ if __name__ == "__main__":
                 tiempo = controller.delta_time(start_time,end_time)
                 print(tiempo)
                 prim_ultimos = controller.prim_ult(list_ordenada)
-                print(prim_ultimos)
+                
+                #print(dato1,dato2,dato3,datoult3,datoult2,dato0)
+                #print(prim_ultimos)
 
             elif int(inputs) == 2:
                 print_req_1(control)
@@ -222,7 +232,10 @@ if __name__ == "__main__":
                 print_req_6(control,anio)
 
             elif int(inputs) == 8:
-                print_req_7(control)
+                top= int(input('ingrese el top que desea buscar: '))
+                a_i = input('ingrese el año inicial: ')
+                a_f= input('ingrese el año final: ')
+                print_req_7(control,top,a_i,a_f)
 
             elif int(inputs) == 9:
                 print_req_8(control)
