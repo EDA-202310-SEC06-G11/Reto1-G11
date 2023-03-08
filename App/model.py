@@ -742,28 +742,28 @@ def req_7(data_structs,top,a_i,a_f):
     # TODO: Realizar el requerimiento 7
     #PRUEBAS 
     data = data_structs["data"]
-    ñ = lt.newList('ARRAY_LIST')
+    n = lt.newList('ARRAY_LIST')
     list_order = merg.sort(data, cmp_anio_codigo_costosgastos)
     codigo_al= lt.getElement(list_order,1)
     año = ''
     for i in lt.iterator(list_order):
         if i["Año"]>=a_i and i["Año"]<=a_f:
             if i["Año"] != año:
-                lt.addLast(ñ, i)
+                lt.addLast(n, i)
                 año = i["Año"]
 
             elif i['Año'] == año:
                 if i['Código actividad económica'] != codigo_al['Código actividad económica']:
-                    lt.addLast(ñ,codigo_al)
+                    lt.addLast(n,codigo_al)
                     codigo_al = i
                 elif i['Código actividad económica'] == codigo_al['Código actividad económica']:
                     codigo_al['Total ingresos netos'] += i['Total ingresos netos']
                     codigo_al['Total costos y gastos'] += i['Total costos y gastos']
                     codigo_al['Total saldo a pagar'] += i['Total saldo a pagar']
                     codigo_al['Total saldo a favor'] += i['Total saldo a favor']
-    lt.addLast(ñ,codigo_al)
-    lt.deleteElement(ñ,1)
-    new_order = merg.sort(ñ,cmp_gastos)
+    lt.addLast(n,codigo_al)
+    lt.deleteElement(n,1)
+    new_order = merg.sort(n,cmp_gastos)
     size = lt.size(new_order)
     if size<top:
         print('no hay suficientes datos para el top')
