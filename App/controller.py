@@ -26,7 +26,7 @@ import time
 import csv
 import pandas as pd
 from DISClib.ADT import list as lt
-
+import tabulate 
 
 """
 El controlador se encarga de mediar entre la vista y el modelo.
@@ -125,10 +125,9 @@ def req_2(control):
     Retorna el resultado del requerimiento 2
     """
     # TODO: Modificar el requerimiento 2
+    start=get_time()
     req_2 = model.req_2(control["model"])
     lista=[]
-    print(req_2)
-    
     for i in lt.iterator(req_2):
         columna=[]
         columna.append(i["Año"])
@@ -143,6 +142,8 @@ def req_2(control):
         columna.append(i["Total saldo a pagar"])
         columna.append(i["Total saldo a favor"])
         lista.append(columna)  
+    final=get_time()
+    print(delta_time(start,final))
     df=pd.DataFrame(lista,columns=["Año", "Código actividad económica", "Nombre actividad económica","Código sector económico",
                                    "Nombre sector económico","Código subsector económico",
                                    "Nombre subsector económico","Total ingresos netos",
@@ -198,6 +199,7 @@ def req_5(control):
     Retorna el resultado del requerimiento 5
     """
     # TODO: Modificar el requerimiento 5
+    start=get_time()
     req_5 = model.req_5(control["model"])
     primera_lista = req_5[0]
     segunda_lista =req_5[1]
@@ -210,7 +212,7 @@ def req_5(control):
         columna =[]
         columna.append(i["Año"])
         columna.append(i["Código actividad económica"])
-        columna.append(i["Nombre sector económico"])
+        columna.append(i["Nombre actividad económica"])
         columna.append(i["Descuentos tributarios"])
         columna.append(i["Total ingresos netos"])
         columna.append(i["Total costos y gastos"])
@@ -237,6 +239,8 @@ def req_5(control):
         columna.append(i["Total saldo a pagar del subsector economico"])
         columna.append(i["Total saldo a favor del subsector economico"])
         lista.append(columna)  
+    end = get_time()
+    print(delta_time(start,end))
     df=pd.DataFrame(lista,columns=["Año", "Codigo sector economico", "Nombre sector economico","Codigo subsector economico",
                                    "Nombre subsector economico","Total de descuentos tributarios del subsector economico",
                                    "Total ingresos netos del subsector economico","Total costos y gastos del subsector economico",
@@ -250,10 +254,50 @@ def req_6(control,anio):
     Retorna el resultado del requerimiento 6
     """
     # TODO: Modificar el requerimiento 6
+    start=get_time()
     req_6 = model.req_6(control["model"],anio)
+    lista1=lt.firstElement(req_6)
+    tabla1=[]
     
+    for i in lt.iterator(lista1):
+        columna=[]
+        columna.append(i["Código sector económico"])
+        columna.append(i["Nombre sector económico"])
+        columna.append(i["Total ingresos netos del sector economico"])
+        columna.append(i["Total costos y gastos del sector economico"])
+        columna.append(i["Total saldo a pagar del sector economico"])
+        columna.append(i["Total saldo a favor del sector economico"])
+        columna.append(i["Subsector economico que mas aporto"])
+        columna.append(i["Subsector economico que menos aporto"])
+        tabla1.append(columna)
     
-    return req_6
+    df=pd.DataFrame(tabla1,columns=["Codigo sector economico", "Nombre sector económico", "Total ingresos netos del sector economico","Total costos y gastos del sector economico",
+                                   "Total saldo a pagar del sector economico","Total saldo a favor del sector economico",
+                                   "Subsector economico que mas aporto","Subsector economico que menos aporto"],index=None)
+    df["Nombre sector económico"]=df["Nombre sector económico"].str.wrap(20)
+    df.set_axis(labels=df.columns.str.wrap(10), axis=1, inplace=True)
+    
+    lista2=lt.getElement(req_6,2)
+    tabla2=[]
+    for i in lt.iterator(lista2):
+        columna=[]
+        columna.append(i["Código subsector económico"])
+        columna.append(i["Nombre subsector económico"])
+        columna.append(i["Total ingresos netos del subsector economico"])
+        columna.append(i["Total costos y gastos del subsector economico"])
+        columna.append(i["Total saldo a pagar del subsector economico"])
+        columna.append(i["Total saldo a favor del subsector economico"])
+        columna.append(i["Actividad economica que mas aporto"])
+        columna.append(i["Actividad economica que menos aporto"])
+        tabla2.append(columna)
+    end=get_time()
+    print(delta_time(start,end))
+    df2=pd.DataFrame(tabla2,columns=["Código subsector económico", "Nombre subsector económico", "Total ingresos netos del subsector economico","Total costos y gastos del subsector economico",
+                                   "Total saldo a pagar del subsector economico","Total saldo a favor del subsector economico",
+                                   "Actividad economica que mas aporto","Actividad economica que menos aporto"],index=None)
+    df2["Nombre subsector económico"]=df2["Nombre subsector económico"].str.wrap(10)
+    df2.set_axis(labels=df.columns.str.wrap(10), axis=1, inplace=True) 
+    return df ,df2
 
 
 def req_7(control,top,a_i,a_f):

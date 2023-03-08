@@ -137,7 +137,15 @@ def print_req_6(control,anio):
         Función que imprime la solución del Requerimiento 6 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 6
-    print(controller.req_6(control,anio))
+    
+    req_6=controller.req_6(control,anio)
+    tabla1=req_6[0]
+    tabla2=req_6[1]
+    widt = [3,4,20,6,6,6,6,6,6]
+    widt2=  [3,2,20,6,6,6,6,6,6]
+    print(tabulate(tabla1,tabla1.columns,tablefmt="grid",maxcolwidths=widt))
+    print("------------------------------------Economic subsector that contributed the most------------------------------------")
+    print(tabulate(tabla2,tabla2.columns,tablefmt="grid",maxcolwidths=widt2))
     #print(tabulate(controller.req_6(control,anio), headers=["Codigo sector economico","Nombre sector economico ","Total ingresos net"]))
 
 
@@ -174,7 +182,8 @@ if __name__ == "__main__":
         try:
             if int(inputs) == 1:
                 print("Cargando información de los archivos ....\n")
-                data_tipo = input('cual estructura desea usar (ARRAY_LIST, SINGLE_LINKED): ')
+                #data_tipo = input('cual estructura desea usar (ARRAY_LIST, SINGLE_LINKED): ')
+                data_tipo = "ARRAY_LIST"
                 print("Elija el tamaño del archivo")
                 print("5pct")
                 print("10pct")
@@ -189,7 +198,8 @@ if __name__ == "__main__":
                 data = load_data(control,size)
                 catalog = control['model']
                 data = catalog['data']
-                order_tipo= input("Cual tipo de ordenamiento desea ejecutar(selection,shell,insertion,merge,quick):")
+                #order_tipo= input("Cual tipo de ordenamiento desea ejecutar(selection,shell,insertion,merge,quick):")
+                order_tipo="merge"
                 start_time=controller.get_time()
                 list_ordenada = controller.ordenar(order_tipo,data)
                 end_time=controller.get_time()
@@ -197,8 +207,8 @@ if __name__ == "__main__":
                 print(tiempo)
                 prim_ultimos = controller.prim_ult(list_ordenada)
                 
-                #print(dato1,dato2,dato3,datoult3,datoult2,dato0)
-                #print(prim_ultimos)
+                
+                print(prim_ultimos)
 
             elif int(inputs) == 2:
                 print_req_1(control)
