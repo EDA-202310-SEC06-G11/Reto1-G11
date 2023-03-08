@@ -107,7 +107,13 @@ def print_req_3(control):
         Función que imprime la solución del Requerimiento 3 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 3
-    print(controller.req_3(control))
+    df=controller.req_3(control)[0]
+    df2=controller.req_3(control)[1]
+    
+    widt = [2,4,3,30,2,30,6,6,6,6,6]
+    print(tabulate(df,df.columns,tablefmt="grid",maxcolwidths=widt))
+    print("------------------------Otras-Tablas---------------------------------")
+    print(tabulate(df2,df2.columns,tablefmt="grid"))
 
 
 def print_req_4(control):
@@ -115,9 +121,13 @@ def print_req_4(control):
         Función que imprime la solución del Requerimiento 4 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 4
-    df=controller.req_4(control)
+    df=controller.req_4(control)[0]
+    df2=controller.req_4(control)[1]
+    
     widt = [2,4,3,30,2,30,6,6,6,6,6]
-    print(tabulate(df,df.columns,tablefmt="grid",maxcolwidths=widt,))
+    print(tabulate(df,df.columns,tablefmt="grid",maxcolwidths=widt))
+    print("------------------------Otras-Tablas---------------------------------")
+    print(tabulate(df2,df2.columns,tablefmt="grid"))
 
 def print_req_5(control):
     """
@@ -154,7 +164,9 @@ def print_req_7(control,top,a_i,a_f):
         Función que imprime la solución del Requerimiento 7 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 7
-    print(controller.req_7(control,top,a_i,a_f))
+    df=controller.req_7(control,top,a_i,a_f)
+    widt = [2,4,3,30,2,30,6,6,6,6,6]
+    print(tabulate(df,df.columns,tablefmt="grid",maxcolwidths=widt))
 
 
 def print_req_8(control):
@@ -183,7 +195,7 @@ if __name__ == "__main__":
             if int(inputs) == 1:
                 print("Cargando información de los archivos ....\n")
                 #data_tipo = input('cual estructura desea usar (ARRAY_LIST, SINGLE_LINKED): ')
-                data_tipo = "ARRAY_LIST"
+                data_tipo = 'ARRAY_LIST'
                 print("Elija el tamaño del archivo")
                 print("5pct")
                 print("10pct")
@@ -199,7 +211,7 @@ if __name__ == "__main__":
                 catalog = control['model']
                 data = catalog['data']
                 #order_tipo= input("Cual tipo de ordenamiento desea ejecutar(selection,shell,insertion,merge,quick):")
-                order_tipo="merge"
+                order_tipo = 'merge'
                 start_time=controller.get_time()
                 list_ordenada = controller.ordenar(order_tipo,data)
                 end_time=controller.get_time()
