@@ -329,7 +329,10 @@ def req_7(control,top,a_i,a_f):
     Retorna el resultado del requerimiento 7
     """
     # TODO: Modificar el requerimiento 7
+    start = get_time
     req_7 = model.req_7(control["model"],top,a_i,a_f)
+    end = get_time
+    print(delta_time(start,end))
     lista=[]
     for i in lt.iterator(req_7):
         columna =[]
